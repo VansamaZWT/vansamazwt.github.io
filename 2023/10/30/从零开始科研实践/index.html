@@ -1,0 +1,255 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>从零开始科研实践之智能信息处理（一）--无标签数据 | VansamaZWT's personal web</title><meta name="author" content="VansamaZWT"><meta name="copyright" content="VansamaZWT"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="前言本学期在IIP组的王崇峻老师门下做简单的本科科研实践，以此记录学习历程。第一次任务是对IIP组的研究方向进行概况了解，以下是科普性质的机器学习内容，如果路过的你正好对机器学习感兴趣且打算从零开始了解那本文会很适合你阅读。 无标签数据及其处理什么是标签？数据的标签（Label）是指对于每个数据样本所提供的预先定义的正确答案或类别信息。标签是用于训练机器学习模型的目标输出，它们提供了数据样本与相应">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从零开始科研实践之智能信息处理（一）--无标签数据">
+<meta property="og:url" content="https://vansamazwt.github.io/2023/10/30/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%A7%91%E7%A0%94%E5%AE%9E%E8%B7%B5/index.html">
+<meta property="og:site_name" content="VansamaZWT&#39;s personal web">
+<meta property="og:description" content="前言本学期在IIP组的王崇峻老师门下做简单的本科科研实践，以此记录学习历程。第一次任务是对IIP组的研究方向进行概况了解，以下是科普性质的机器学习内容，如果路过的你正好对机器学习感兴趣且打算从零开始了解那本文会很适合你阅读。 无标签数据及其处理什么是标签？数据的标签（Label）是指对于每个数据样本所提供的预先定义的正确答案或类别信息。标签是用于训练机器学习模型的目标输出，它们提供了数据样本与相应">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://z1.ax1x.com/2023/10/30/pimwiAP.jpg">
+<meta property="article:published_time" content="2023-10-30T04:21:25.000Z">
+<meta property="article:modified_time" content="2023-10-30T04:44:44.601Z">
+<meta property="article:author" content="VansamaZWT">
+<meta property="article:tag" content="技术">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://z1.ax1x.com/2023/10/30/pimwiAP.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://vansamazwt.github.io/2023/10/30/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%A7%91%E7%A0%94%E5%AE%9E%E8%B7%B5/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '从零开始科研实践之智能信息处理（一）--无标签数据',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-10-30 12:44:44'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://imgur.com/a/LjjqPsY" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">4</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><hr class="custom-hr"/></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://z1.ax1x.com/2023/10/30/pimwiAP.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="VansamaZWT's personal web"><span class="site-name">VansamaZWT's personal web</span></a></span><div id="menus"><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">从零开始科研实践之智能信息处理（一）--无标签数据</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-10-30T04:21:25.000Z" title="发表于 2023-10-30 12:21:25">2023-10-30</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-10-30T04:44:44.601Z" title="更新于 2023-10-30 12:44:44">2023-10-30</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="从零开始科研实践之智能信息处理（一）--无标签数据"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本学期在IIP组的王崇峻老师门下做简单的本科科研实践，以此记录学习历程。<br>第一次任务是对IIP组的研究方向进行概况了解，以下是科普性质的机器学习内容，如果路过的你正好对机器学习感兴趣且打算从零开始了解那本文会很适合你阅读。</p>
+<h1 id="无标签数据及其处理"><a href="#无标签数据及其处理" class="headerlink" title="无标签数据及其处理"></a>无标签数据及其处理</h1><h2 id="什么是标签？"><a href="#什么是标签？" class="headerlink" title="什么是标签？"></a>什么是标签？</h2><p>数据的标签（Label）是指对于每个数据样本所提供的预先定义的正确答案或类别信息。标签是用于训练机器学习模型的目标输出，它们提供了数据样本与相应目标之间的对应关系。<br>IIP的<strong>无标签数据</strong>指的是在智能信息处理中使用的没有预先标记或分类的数据。这类数据通常是原始的、未经处理的信息，没有附加的标签、类别或注释。与有标签数据相比，无标签数据的主要特点是缺乏明确的标识或指示。</p>
+<h2 id="如何处理无标签的数据？"><a href="#如何处理无标签的数据？" class="headerlink" title="如何处理无标签的数据？"></a>如何处理无标签的数据？</h2><p>所谓的监督学习就是有明确的监督信号（比如分类任务中的 label，检测任务中的 cls等）去驱动网络不断地学习更好的特征表示，并完成相应的任务。所以对于无监督学习，我们很容易想到，能不能用什么方法，去构造某些监督信号？可能这些构造出来的信号不及监督学习中的label、bbox那样明确，但在无监督大样本的加持下，总算也能让模型慢慢变好。</p>
+<h3 id="无监督学习"><a href="#无监督学习" class="headerlink" title="无监督学习"></a>无监督学习</h3><p><em><strong>无监督学习</strong></em>是一种机器学习方法，其目标是从无标签数据中发现数据的内在结构、模式和关联，而无需预先提供类别标签或目标输出。与有监督学习不同，无监督学习不依赖于人工标注的数据，而是通过算法自动学习数据的特征和潜在规律。</p>
+<h4 id="聚类"><a href="#聚类" class="headerlink" title="聚类"></a>聚类</h4><p>聚类是一种无监督学习的算法，是将相似的数据样本分组或聚集在一起的任务。聚类算法根据数据样本之间的相似性或距离度量，将它们划分为不同的群组，使得同一群组内的样本相似度较高，而不同群组之间的相似度较低。聚类常用于数据分析、市场细分、图像分割等领域。</p>
+<h5 id="K均值聚类"><a href="#K均值聚类" class="headerlink" title="K均值聚类"></a>K均值聚类</h5><p>K均值聚类就是制定分组的数量为K，自动进行分组。</p>
+<p>K 均值聚类的步骤如下：</p>
+<p>1.定义 K 个重心。一开始这些重心是随机的（也有一些更加有效的用于初始化重心的算法）<br>2.寻找最近的重心并且更新聚类分配。将每个数据点都分配给这 K 个聚类中的一个。每个数据点都被分配给离它们最近的重心的聚类。这里的「接近程度」的度量是一个超参数——通常是欧几里得距离（Euclidean distance）。<br>3.将重心移动到它们的聚类的中心。每个聚类的重心的新位置是通过计算该聚类中所有数据点的平均位置得到的。<br>重复第 2 和 3 步，直到每次迭代时重心的位置不再显著变化（即直到该算法收敛）。<br><img src="https://pic1.zhimg.com/v2-d37f29d9c9e9f3dffd46273b5f0fa15c_b.webp"></p>
+<h5 id="层次聚类"><a href="#层次聚类" class="headerlink" title="层次聚类"></a>层次聚类</h5><p>如果不知道应该分为几类，那么层次聚类就比较适合了。层次聚类会构建一个多层嵌套的分类，类似一个树状结构。<br>层次聚类的步骤如下：</p>
+<p>1.首先从 N 个聚类开始，每个数据点一个聚类。<br>2.将彼此靠得最近的两个聚类融合为一个。现在你有 N-1 个聚类。<br>3.重新计算这些聚类之间的距离。<br>重复第 2 和 3 步，直到你得到包含 N 个数据点的一个聚类。<br>选择一个聚类数量，然后在这个树状图中划一条水平线。<br><img src="https://pic3.zhimg.com/80/v2-9a2efd705bd291566d9107cf82b1c816_720w.webp"></p>
+<h4 id="异常检测"><a href="#异常检测" class="headerlink" title="异常检测"></a>异常检测</h4><p>异常检测旨在识别与大多数数据样本不同或具有异常行为的样本。它通过对数据进行建模和分析，在不知道正常值的情况下，寻找与正常模式不符的异常点或离群值。异常检测可应用于网络安全、金融欺诈检测、设备故障检测等场景。</p>
+<h5 id="基于高斯分布的异常检测"><a href="#基于高斯分布的异常检测" class="headerlink" title="基于高斯分布的异常检测"></a>基于高斯分布的异常检测</h5><p>基于高斯分布的异常检测是一种常见的异常检测算法，也被称为正态分布异常检测。该算法的基本思想是假设正常数据集是由高斯分布生成的，而异常点则偏离了高斯分布的中心，因此可以通过计算数据点与高斯分布中心之间的距离来确定异常点。具体地，算法包括以下步骤：<br>1.对于数据集 X ，先求出每个特征的均值和标准差，得到一个 n 维高斯分布的概率密度函数。<br>2.对于一个新的数据点 X，计算其在各个特征上的概率密度值，即：<br><a target="_blank" rel="noopener" href="https://imgse.com/i/pimwkh8"><img src="https://z1.ax1x.com/2023/10/30/pimwkh8.png" alt="pimwkh8.png"></a><br>3.如果 p ( x ) &lt; ϵ，则将 x  视为异常点，其中 ϵ  是阈值参数，通常由交叉验证等方法确定。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成二维数据集</span></span><br><span class="line">np.random.seed(<span class="number">42</span>)</span><br><span class="line">X = np.random.randn(<span class="number">100</span>, <span class="number">2</span>)</span><br><span class="line">X[:<span class="number">5</span>] += np.array([<span class="number">5</span>, <span class="number">5</span>])  <span class="comment"># 添加一些异常点</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 计算均值和方差</span></span><br><span class="line">mu = np.mean(X, axis=<span class="number">0</span>)</span><br><span class="line">sigma = np.std(X, axis=<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 计算概率密度函数</span></span><br><span class="line">p = np.prod(<span class="number">1</span> / (np.sqrt(<span class="number">2</span> * np.pi) * sigma) * np.exp(- (X - mu) ** <span class="number">2</span> / (<span class="number">2</span> * sigma ** <span class="number">2</span>)), axis=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置阈值</span></span><br><span class="line">epsilon = <span class="number">1e-4</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 找出异常点</span></span><br><span class="line">outliers = X[p &lt; epsilon]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 绘制数据集和异常点</span></span><br><span class="line">plt.scatter(X[:, <span class="number">0</span>], X[:, <span class="number">1</span>])</span><br><span class="line">plt.scatter(outliers[:, <span class="number">0</span>], outliers[:, <span class="number">1</span>], color=<span class="string">&#x27;r&#x27;</span>, marker=<span class="string">&#x27;x&#x27;</span>, s=<span class="number">100</span>)</span><br><span class="line">plt.show()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/5140fa66fd024cd2a4c4eb39bb1e0cc8.png#pic_center"></p>
+<h4 id="关联规划"><a href="#关联规划" class="headerlink" title="关联规划"></a>关联规划</h4><p>关联规则用来描述两个或多个事物之间的关联性，其通过一件或多件事物来预测其它事物，可以从大量数据中获取有价值数据之间的联系。关联规则挖掘常用于市场篮子分析、推荐系统等领域。<br><a target="_blank" rel="noopener" href="https://imgse.com/i/pimwV1g"><img src="https://z1.ax1x.com/2023/10/30/pimwV1g.png" alt="pimwV1g.png"></a></p>
+<h3 id="自监督学习"><a href="#自监督学习" class="headerlink" title="自监督学习"></a>自监督学习</h3><p>自监督学习（Self-supervised Learning）作为Unsupervised Learning的一个重要分支，给出了很好地解决方案。它的目标是更好地利用无监督数据，提升后续监督学习任务的效果。</p>
+<p>其基本思想是：Predicting everything from everything else。</p>
+<p>具体方法是首先定义一个Pretext task (辅助任务)，即从无监督的数据中，通过巧妙地设计自动构造出有监督（伪标签）数据，学习一个预训练模型。构造有监督（伪标签）数据的方法可以是：假装输入中的一部分不存在，然后基于其余的部分用模型预测缺失的这部分。如果学习的预训练模型能准确预测缺失部分的数据，说明它的表示学习能力很强，能够学习到输入中的高级语义信息、泛化能力比较强。而深度学习的精髓正在于强大的表示学习能力。</p>
+<p>然后可以将预训练模型，通过简单的Finetune，应用到下游的多个应用场景，能比只使用监督数据训练的模型有更好的效果。</p>
+<p>自监督学习的关键在于如何设计Pretext任务、损失函数，来优化预训练模型参数。<br>E.G.2015 (ICCV) Unsupervised Visual Representation Learning by Context Prediction</p>
+<p>ICCV 2015这篇论文里，构造训练数据的方法是：随机从图片采样一个patch，然后从它的邻居里随机采样一个patch，监督标签对应是邻居的位置信息。作者认为，准确地预测两个patch的位置关系，需要模型学会物体整体和部分的关系。<br><a target="_blank" rel="noopener" href="https://imgse.com/i/pimwZcQ"><img src="https://z1.ax1x.com/2023/10/30/pimwZcQ.png" alt="pimwZcQ.png"></a></p>
+<h3 id="半监督学习"><a href="#半监督学习" class="headerlink" title="半监督学习"></a>半监督学习</h3><p>在许多ML的实际应用中，很容易找到海量的无类标签的样例，但需要使用特殊设备或经过昂贵且用时非常长的实验过程进行人工标记才能得到有类标签的样本，由此产生了极少量的有类标签的样本和过剩的无类标签的样例。因此，人们尝试将大量的无类标签的样例加入到有限的有类标签的样本中一起训练来进行学习，期望能对学习性能起到改进的作用，由此产生了半监督学习(Semi-supervised Learning)，如如图１所示。半监督学习(Semi-supervised Learning)避免了数据和资源的浪费，同时解决了监督学习(Supervised Learning)的 模型泛化能力不强和无监督学习（Unsupervised learning）的模型不精确等问题。<br><a target="_blank" rel="noopener" href="https://imgse.com/i/pimwlNV"><img src="https://z1.ax1x.com/2023/10/30/pimwlNV.png" alt="pimwlNV.png"></a><br>（1）平滑假设(Smoothness Assumption)：位于稠密数据区域的两个距离很近的样例的类标签相似，也就是说，当两个样例被稠密数据区域中的边连接时，它们在很大的概率下有相同的类标签；相反地，当两个样例被稀疏数据区域分开时，它们的类标签趋于不同。</p>
+<p>（2）聚类假设(Cluster Assumption)：当两个样例位于同一聚类簇时，它们在很大的概率下有相同的类标签。这个假设的等价定义为低密度分离假设(Low Sensity Separation Assumption)，即分类决策边界应该穿过稀疏数据区域，而避免将稠密数据区域的样例分到决策边界两侧。</p>
+<p>（3）流形假设(Manifold Assumption)：将高维数据嵌入到低维流形中，当两个样例位于低维流形中的一个小局部邻域内时，它们具有相似的类标签。<br><a target="_blank" rel="noopener" href="https://imgse.com/i/pimwuBn"><img src="https://z1.ax1x.com/2023/10/30/pimwuBn.png" alt="pimwuBn.png"></a></p>
+<h3 id="迁移学习"><a href="#迁移学习" class="headerlink" title="迁移学习"></a>迁移学习</h3><p>迁移学习是一种机器学习方法，旨在通过将从一个领域（源领域）学到的知识和经验应用于另一个领域（目标领域）的任务中，从而改善目标领域的性能。迁移学习的核心思想是通过利用源领域的数据，模型或特征来辅助目标领域的学习，尤其在目标领域数据有限或标注困难的情况下表现出色。<br>迁移学习可以归为三类：</p>
+<p>领域（Domain）：领域是指数据的分布和特征空间。源领域和目标领域可以具有不同的数据分布，但通常假设它们在某种程度上是相关的。</p>
+<p>知识（Knowledge）：知识是从源领域中学到的有关任务的信息，可以是模型的权重、特征表示或其他中间表示。迁移学习的目标是将这些知识迁移到目标领域中，以提高目标领域的性能。</p>
+<p>迁移策略（Transfer Strategy）：迁移策略定义了如何利用源领域的知识来改善目标领域的学习。常见的迁移策略包括特征提取、预训练模型微调、领域自适应和样本重用等。</p>
+<p>特征提取：将源领域的特征提取器应用于目标领域，利用共享的特征表示来学习目标领域的任务。<br>预训练模型微调：在源领域上预训练的模型作为初始模型，在目标领域上继续进行训练，通过微调适应目标领域的任务。<br>领域自适应：通过对源领域和目标领域的分布进行对齐或调整，以减小领域之间的差异，从而提高目标领域的泛化性能。<br>样本重用：利用源领域的有标签数据或生成的合成样本，结合目标领域的有标签数据进行训练。<br>迁移学习可以在许多领域中应用，如计算机视觉、自然语言处理和推荐系统等。它能够加速模型的训练过程，提高模型的性能和泛化能力，并在数据稀缺或领域变化的情况下表现出色。通过迁移学习，可以更好地利用已有的知识和数据资源，从而降低机器学习在新任务上的成本和难度。</p>
+<p>##结尾<br>以上知识来源于多篇知乎，国内博客，GPT-3.5，后面迁移学习和半监督学习的部分还有待深入。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://VansamaZWT.github.io">VansamaZWT</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://vansamazwt.github.io/2023/10/30/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%A7%91%E7%A0%94%E5%AE%9E%E8%B7%B5/">https://vansamazwt.github.io/2023/10/30/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%A7%91%E7%A0%94%E5%AE%9E%E8%B7%B5/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://VansamaZWT.github.io" target="_blank">VansamaZWT's personal web</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%8A%80%E6%9C%AF/">技术</a></div><div class="post_share"><div class="social-share" data-image="https://z1.ax1x.com/2023/10/30/pimwiAP.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2023/10/23/2023-10-23-10-29/" title="2023/10.23-10.29"><img class="cover" src="https://th.bing.com/th/id/OIP.cm2JEpf9nZqXZ0Vs8Ej0eAHaEK?w=299&amp;h=180&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.3&amp;pid=1.7" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">2023/10.23-10.29</div></div></a></div></nav><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div id="comment-switch"><span class="first-comment">Valine</span><span class="switch-btn"></span><span class="second-comment">Disqus</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div><div><div id="disqus_thread"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://imgur.com/a/LjjqPsY" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">VansamaZWT</div><div class="author-info__description">花开堪折直须折，莫待无花空折枝。</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">4</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/VansamaZWT"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/VansamaZWT" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="/1436728455@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%97%A0%E6%A0%87%E7%AD%BE%E6%95%B0%E6%8D%AE%E5%8F%8A%E5%85%B6%E5%A4%84%E7%90%86"><span class="toc-number"></span> <span class="toc-text">无标签数据及其处理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E6%A0%87%E7%AD%BE%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">什么是标签？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E6%97%A0%E6%A0%87%E7%AD%BE%E7%9A%84%E6%95%B0%E6%8D%AE%EF%BC%9F"><span class="toc-number">2.</span> <span class="toc-text">如何处理无标签的数据？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0"><span class="toc-number">2.1.</span> <span class="toc-text">无监督学习</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%81%9A%E7%B1%BB"><span class="toc-number">2.1.1.</span> <span class="toc-text">聚类</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#K%E5%9D%87%E5%80%BC%E8%81%9A%E7%B1%BB"><span class="toc-number">2.1.1.1.</span> <span class="toc-text">K均值聚类</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%B1%82%E6%AC%A1%E8%81%9A%E7%B1%BB"><span class="toc-number">2.1.1.2.</span> <span class="toc-text">层次聚类</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B"><span class="toc-number">2.1.2.</span> <span class="toc-text">异常检测</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E9%AB%98%E6%96%AF%E5%88%86%E5%B8%83%E7%9A%84%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B"><span class="toc-number">2.1.2.1.</span> <span class="toc-text">基于高斯分布的异常检测</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B3%E8%81%94%E8%A7%84%E5%88%92"><span class="toc-number">2.1.3.</span> <span class="toc-text">关联规划</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0"><span class="toc-number">2.2.</span> <span class="toc-text">自监督学习</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%8A%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0"><span class="toc-number">2.3.</span> <span class="toc-text">半监督学习</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0"><span class="toc-number">2.4.</span> <span class="toc-text">迁移学习</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/10/30/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%A7%91%E7%A0%94%E5%AE%9E%E8%B7%B5/" title="从零开始科研实践之智能信息处理（一）--无标签数据"><img src="https://z1.ax1x.com/2023/10/30/pimwiAP.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="从零开始科研实践之智能信息处理（一）--无标签数据"/></a><div class="content"><a class="title" href="/2023/10/30/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%A7%91%E7%A0%94%E5%AE%9E%E8%B7%B5/" title="从零开始科研实践之智能信息处理（一）--无标签数据">从零开始科研实践之智能信息处理（一）--无标签数据</a><time datetime="2023-10-30T04:21:25.000Z" title="发表于 2023-10-30 12:21:25">2023-10-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/23/2023-10-23-10-29/" title="2023/10.23-10.29"><img src="https://th.bing.com/th/id/OIP.cm2JEpf9nZqXZ0Vs8Ej0eAHaEK?w=299&amp;h=180&amp;c=7&amp;r=0&amp;o=5&amp;dpr=1.3&amp;pid=1.7" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="2023/10.23-10.29"/></a><div class="content"><a class="title" href="/2023/10/23/2023-10-23-10-29/" title="2023/10.23-10.29">2023/10.23-10.29</a><time datetime="2023-10-23T02:42:05.000Z" title="发表于 2023-10-23 10:42:05">2023-10-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/10/19/To-the-north/" title="向北"><img src="https://z1.ax1x.com/2023/10/30/pimUV1J.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="向北"/></a><div class="content"><a class="title" href="/2023/10/19/To-the-north/" title="向北">向北</a><time datetime="2023-10-19T01:52:42.000Z" title="发表于 2023-10-19 09:52:42">2023-10-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/09/18/hello-world/" title="Hello World"><img src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Hello World"/></a><div class="content"><a class="title" href="/2023/09/18/hello-world/" title="Hello World">Hello World</a><time datetime="2023-09-18T07:20:16.572Z" title="发表于 2023-09-18 15:20:16">2023-09-18</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By VansamaZWT</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: '',
+      appKey: '',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: "",
+      path: window.location.pathname,
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script><script>function loadDisqus () {
+  const disqus_config = function () {
+    this.page.url = 'https://vansamazwt.github.io/2023/10/30/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%A7%91%E7%A0%94%E5%AE%9E%E8%B7%B5/'
+    this.page.identifier = '/2023/10/30/%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E7%A7%91%E7%A0%94%E5%AE%9E%E8%B7%B5/'
+    this.page.title = '从零开始科研实践之智能信息处理（一）--无标签数据'
+  }
+
+  const disqusReset = () => {
+    DISQUS.reset({
+      reload: true,
+      config: disqus_config
+    })
+  }
+
+  btf.addModeChange('disqus', disqusReset)
+
+  if (window.DISQUS) disqusReset()
+  else {
+    (function() { 
+      var d = document, s = d.createElement('script');
+      s.src = 'https://.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  }
+}
+
+if ('Valine' === 'Disqus' || !false) {
+  if (false) btf.loadComment(document.getElementById('disqus_thread'), loadDisqus)
+  else loadDisqus()
+} else {
+  function loadOtherComment () {
+    loadDisqus()
+  }
+}
+</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
