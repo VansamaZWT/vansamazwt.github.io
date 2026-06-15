@@ -6,7 +6,13 @@
     "build": "hexo generate",
     "clean": "hexo clean",
     "deploy": "hexo deploy",
+    "new": "hexo new post",
+    "preview": "hexo clean && hexo server",
+    "publish": "hexo clean && hexo deploy",
     "server": "hexo server"
+  },
+  "engines": {
+    "node": "22.x"
   },
   "hexo": {
     "version": "6.3.0"
